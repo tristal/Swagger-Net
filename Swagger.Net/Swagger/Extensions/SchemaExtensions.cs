@@ -3,6 +3,7 @@ using Swagger.Net.Swagger.Annotations;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 
 namespace Swagger.Net
 {
@@ -24,11 +25,8 @@ namespace Swagger.Net
         {
             if (attribute is RangeAttribute range)
             {
-                if (double.TryParse(range.Maximum.ToString(), out double maximum))
-                    schema.maximum = maximum;
-
-                if (double.TryParse(range.Minimum.ToString(), out double minimum))
-                    schema.minimum = minimum;
+                schema.minimum = range.Minimum;
+                schema.maximum = range.Maximum;
             }
         }
 
